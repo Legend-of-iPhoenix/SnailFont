@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SnailFont</title>
+  <style type="text/css">
+
+    * {
+      font-family: "Arial"
+    }
+
+    h1, h2 {
+      font-weight: normal;
+    }
+
+    code {
+      font-family: "Courier New";
+      font-weight: bold;
+    }
+
+    body {
+      background-color: white;
+    }
+
+    @font-face {
+      font-family: 'SnailFont';
+      src: url('fonts/snailfont.woff2') format('woff2'), 
+           url('fonts/snailfont.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    span.SnailFont {
+      font-family: 'SnailFont'
+    }
+
+    div#demo {
+      height: 33vh;
+      overflow: scroll;
+      width: 100%;
+
+      background-color: #f5f5f5;
+    }
+
+    textarea#demoText {
+      height: 100px;
+      resize: horizontal;
+      max-width: 100%;
+      font-size: 16px;
+    }
+
+    p#footer {
+      position: fixed;
+      bottom: 0;
+    }
+
+
+  </style>
+  <script>
+    var uppercaseSupported = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" // all
+    var lowercaseSupported = "abcdefghijklmnopqrstuvwxyz" // all
+    var numbersSupported = "0123456789" // all
+    var symbolsSupported = "!\"#%&'()+,-./:;<=>?[\\^_{|~";
+    var other = "$¢£¤§©«»²³";
+    var supportedChars = uppercaseSupported + lowercaseSupported + numbersSupported + symbolsSupported.split('').map(char=>'\\'+char).join('') + other.split('').map(char=>'\\'+char).join(''); // .split('').map(char=>'\\'+char).join('') for regex-escaping
+
+    var defaultText = uppercaseSupported + '\n' + lowercaseSupported + '\n' + numbersSupported + '\n' + symbolsSupported +'\n' + other;
+
+    window.onload = function() {
+      var span = document.querySelector("div#demo span.SnailFont");
+      span.innerText = defaultText;
+      span.style.fontSize = "32pt";
+
+      document.querySelector("input#fontSizeSlider").addEventListener("input", function(event) {
+        var fontSize = event.target.value + 'pt';
+        document.querySelector("div#demo span.SnailFont").style.fontSize = fontSize;
+        document.querySelector("#fontSizeNumber").innerText = fontSize;
+      });
+
+      document.querySelector("textarea#demoText").addEventListener("input", function (event) {
+        var text = event.target.value;
+        if (text === '') {
+          text = defaultText;
+        }
+        text = text.replace(new RegExp("[^\\n"+supportedChars+']','g'),' '); // replace unsupported chars with spaces. The split/join stuff is there because it doesn't like the \n in the regex.
+        text = text.replace(/[\f\t\v\u00A0\u2028\u2029]/g, '\xA0') // replace all spaces with non-breaking spaces so they don't get removed.
+        document.querySelector("div#demo span.SnailFont").innerText = text;
+      })
+    }
+  </script>
+  <script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-109579764-3"></script><script>function gtag(){dataLayer.push(arguments)}</script>
+</head>
+<body>
+  <h1>This is <span class="SnailFont">SnailFont</span></h1>
+  <p> SnailFont is a fontface designed with imperfection in mind. </p>
+  <p> It is open-source and free to use for all applications.</p>
+  <h2>Try it:</h2>
+  <div id="demo">
+    <span class="SnailFont">Font Preview Loading...</span>
+  </div>
+  <label for="fontSizeSlider">Font Size: <code id="fontSizeNumber">32pt</code></label><br />
+  <input type="range" name="fontSizeSlider" id="fontSizeSlider" min="12" max="96" step="2" value="32"><br />
+
+  <label for="demoText">Text:</label><br />
+  <textarea name="demoText" id="demoText"></textarea>
+
+  <div id="download">
+    <h2>Download SnailFont:</h2>
+    <p> <code>.ttf</code> file: <a href="https://github.com/Legend-of-iPhoenix/SnailFont/releases/download/v1.0.0/SnailFontTTF.zip">Download</a></p>
+    <p> <code>.woff</code> file: <a href="https://github.com/Legend-of-iPhoenix/SnailFont/releases/download/v1.0.0/SnailFontWOFF.zip">Download</a></p>
+  </div>
+
+  <p id="footer">SnailFont is © 2018 <a href="https://legend-of-iphoenix.github.io">_iPhoenix_</a>. Check out the project repository <a href="https://github.com/Legend-of-iPhoenix/SnailFont/">here</a>.</p>
+</body>
+</html>

@@ -19,6 +19,7 @@
 
     body {
       background-color: white;
+      min-height: 105vh; /* 100vh for body, 5vh for footer */
     }
 
     @font-face {
@@ -29,7 +30,7 @@
       font-style: normal;
     }
 
-    span.SnailFont {
+    span.SnailFont, strong, h3, h2 {
       font-family: 'SnailFont'
     }
 
@@ -51,6 +52,11 @@
     p#footer {
       position: fixed;
       bottom: 0;
+      background-color: #fff;
+      height: 5vh; 
+      margin: 0;
+      padding: 0;
+      width: 100%;
     }
 
 
@@ -59,8 +65,8 @@
     var uppercaseSupported = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" // all
     var lowercaseSupported = "abcdefghijklmnopqrstuvwxyz" // all
     var numbersSupported = "0123456789" // all
-    var symbolsSupported = "!\"#%&'()+,-./:;<=>?[\\^_{|~";
-    var other = "$¢£¤§©«»²³";
+    var symbolsSupported = "!\"#%&'()+,-*./:;<=>?[]\\^_{}|~÷@¡`";
+    var other = "$¢£¤§©«»º¹²³±";
     var supportedChars = uppercaseSupported + lowercaseSupported + numbersSupported + symbolsSupported.split('').map(char=>'\\'+char).join('') + other.split('').map(char=>'\\'+char).join(''); // .split('').map(char=>'\\'+char).join('') for regex-escaping
 
     var defaultText = uppercaseSupported + '\n' + lowercaseSupported + '\n' + numbersSupported + '\n' + symbolsSupported +'\n' + other;
@@ -105,6 +111,13 @@
 
   <div id="download">
     <h2>Download SnailFont:</h2>
+    <p> SnailFont is has been and always will be free to use. All I request is that my license and copyright notice (included in the download) appears with all copies of the software.</p>
+    <p> <span class="SnailFont">v1.1.0</span></p>
+    <p> <code>.ttf</code> file: <a href="https://github.com/Legend-of-iPhoenix/SnailFont/releases/download/v1.1.0/SnailFontTTF.zip">Download</a></p>
+    <p> <code>.woff</code> file: <a href="https://github.com/Legend-of-iPhoenix/SnailFont/releases/download/v1.1.0/SnailFontWOFF.zip">Download</a></p>
+    <h3> Legacy: </h3> <!-- this is SnailFont when bolded by the computer. I'm not sure I like it. Any thoughts? -->
+    <p> Legacy versions are older versions that may not have support for all characters.</p>
+    <p> <span class="SnailFont">v1.0.0</span></p>
     <p> <code>.ttf</code> file: <a href="https://github.com/Legend-of-iPhoenix/SnailFont/releases/download/v1.0.0/SnailFontTTF.zip">Download</a></p>
     <p> <code>.woff</code> file: <a href="https://github.com/Legend-of-iPhoenix/SnailFont/releases/download/v1.0.0/SnailFontWOFF.zip">Download</a></p>
   </div>
